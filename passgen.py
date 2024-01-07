@@ -4,8 +4,9 @@ Password length and special characters can be modified by options.
 
 Usage:
 python3 passgen.py [option1] [option2]
-option1 can be a number of characters e.g. 8, 20, etc.
-option2 can be either - (minus, remove special characters) or a string of special caracters in quotes e.g. '!@#$%^', '-_', etc.
+
+option1 -- number of characters e.g. 8, 20, etc.
+option2 -- either - (minus) to exclude special characters or special caracters to include in quotes e.g. '!@#$%^', '-_', etc.
 """
 import string
 import secrets
