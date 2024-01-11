@@ -7,11 +7,21 @@ def main(page: ft.Page):
     default_pw_len = 12
     password = "Click [Generate] button"
     
-    def passgen(len_pw, punctuation = string.punctuation):
+    def passgen(len_pw, punct):
         letters = string.ascii_letters
         digits = string.digits
-        punctuation = punctuation
-        return(''.join(secrets.choice(punctuation + letters + digits) for i in range(len_pw)))
+        punctuation = punct
+        while True:
+            password = ''.join(secrets.choice(punctuation + letters + digits) for i in range(len_pw))
+            if (any(c.islower() for c in password)
+                and any(c.isupper() for c in password)
+                and sum(c.isdigit() for c in password) >= (int(len_pw/5))
+                and (punctuation == '' 
+                     or sum(password.count(punctuation[c]) for c in range(len(punctuation))) >= (int(len_pw/6))
+                     )
+                     ):
+                break
+        return password
 
     def change_sp_char(e):
         sp_char.value = radio_sp_char.value
