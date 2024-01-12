@@ -4,6 +4,9 @@ import string, secrets
 def main(page: ft.Page):
     page.title = "Password Generator"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.window_width= 480
+    page.window_height = 280
+    page.window_resizable = False
     default_pw_len = 12
     password = "Click [Generate] button"
     
@@ -27,9 +30,7 @@ def main(page: ft.Page):
         sp_char.value = radio_sp_char.value
         page.update()    
     
-    pw_len = ft.TextField(value=default_pw_len, text_align=ft.TextAlign.RIGHT, width=100)
     pw_view = ft.TextField(value=password, text_align=ft.TextAlign.LEFT, width=300)
-    sp_char = ft.TextField(value=string.punctuation, text_align=ft.TextAlign.LEFT, width=300)
     radio_sp_char = ft.RadioGroup(value=string.punctuation, content=ft.Row([
             ft.Radio(value=string.punctuation, label="All"),
             ft.Radio(value="!@$%^&*+#", label="Simple"),
@@ -57,7 +58,10 @@ def main(page: ft.Page):
         page.set_clipboard(pw_view.value)
         page.update
 
-
+    pw_len = ft.TextField(value=default_pw_len, input_filter=ft.InputFilter(allow=True, regex_string=r"[0-9]"), 
+                          text_align=ft.TextAlign.RIGHT, width=80, on_submit=generate_password)
+    sp_char = ft.TextField(value=string.punctuation, text_align=ft.TextAlign.LEFT, width=290, 
+                           on_submit=generate_password)
 
     page.add(
         ft.Column([
@@ -68,29 +72,29 @@ def main(page: ft.Page):
                 ft.IconButton(ft.icons.ADD, on_click=plus_click),
                 ft.FloatingActionButton("Generate", on_click=generate_password, width=100)
             ],
-            alignment=ft.MainAxisAlignment.CENTER,
+            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
             ),
             ft.Row(controls=[
                 ft.Text(value="Password: "),
                 pw_view,
                 ft.IconButton(ft.icons.COPY, tooltip="Copy", on_click=copy_password)
                 ],
-            alignment=ft.MainAxisAlignment.CENTER,
+            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
             ),
-            ft.Row([
-                ft.Text("Special characters: "),
-                sp_char,
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            ),
-            ft.Row(controls=[
-                radio_sp_char
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            )
-        ]
+            ft.Column([
+                ft.Row([
+                    ft.Text("Special characters: "),
+                    sp_char, 
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+                ),
+                ft.Row(controls=[
+                    radio_sp_char
+                ],
+                alignment=ft.MainAxisAlignment.END, width=440
+            )])
+        ], width = 460, alignment=ft.MainAxisAlignment.SPACE_EVENLY, 
         )
     )
-
 
 ft.app(target=main)
