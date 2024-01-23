@@ -52,7 +52,7 @@ def main(page: ft.Page):
     pw_view = ft.TextField(value=password, text_align=ft.TextAlign.LEFT, width=300)
     pw_len = ft.TextField(value=default_pw_len, input_filter=ft.InputFilter(allow=True, regex_string=r"[0-9]"), 
                           text_align=ft.TextAlign.RIGHT, width=80, on_submit=generate_password)
-    sp_char = ft.TextField(value=string.punctuation, text_align=ft.TextAlign.LEFT, width=290, 
+    sp_char = ft.TextField(value="!@$%^&*+#", text_align=ft.TextAlign.LEFT, width=290, 
                            on_submit=generate_password)
     radio_sp_char = ft.RadioGroup(value="!@$%^&*+#", content=ft.Row([
             ft.Radio(value=string.punctuation, label="All"),
