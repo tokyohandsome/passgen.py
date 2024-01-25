@@ -3,11 +3,12 @@ import string, secrets
 
 def main(page: ft.Page):
     page.title = "Password Generator"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.START
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_width= 480
     page.window_height = 280
     page.window_resizable = False
-    default_pw_len = 12
+    default_pw_len = 18
     password = "Click [Generate] button"
     
     def passgen(len_pw, punct):
