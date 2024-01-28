@@ -6,7 +6,7 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.START
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_width= 480
-    page.window_height = 280
+    page.window_height = 290
     page.window_resizable = False
     default_pw_len = 18
     password = "Click [Generate] button"
@@ -62,38 +62,38 @@ def main(page: ft.Page):
             ft.Radio(value="none", label="None"), 
             ]), on_change=change_sp_char
             ) 
+    copy_button = ft.IconButton(ft.icons.COPY, tooltip="Copy", on_click=copy_password, visible = ("Safari" not in page.client_user_agent))
     
     page.add(
-        ft.Column([
-            ft.Row([
-                ft.Text(value="Num of characters: "),
-                ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
-                pw_len,
-                ft.IconButton(ft.icons.ADD, on_click=plus_click),
-                ft.FloatingActionButton("Generate", on_click=generate_password, width=100)
-            ],
-            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-            ),
-            ft.Row(controls=[
-                ft.Text(value="Password: "),
-                pw_view,
-                ft.IconButton(ft.icons.COPY, tooltip="Copy", on_click=copy_password)
-                ],
-            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-            ),
+        ft.Container(
             ft.Column([
                 ft.Row([
-                    ft.Text("Special characters: "),
-                    sp_char, 
+                    ft.Text(value="Num of characters: "),
+                    ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
+                    pw_len,
+                    ft.IconButton(ft.icons.ADD, on_click=plus_click),
+                    ft.FloatingActionButton("Generate", on_click=generate_password, width=100)
                 ],
-                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                ),
+                ), 
                 ft.Row(controls=[
-                    radio_sp_char
-                ],
-                alignment=ft.MainAxisAlignment.END, width=440
-            )])
-        ], width = 460, alignment=ft.MainAxisAlignment.SPACE_EVENLY, 
+                    ft.Text(value="Password: "),
+                    pw_view,
+                    copy_button
+                    ],
+                ),
+                ft.Column([
+                    ft.Row([
+                        ft.Text("Special characters: "),
+                        sp_char, 
+                    ],
+                    ),
+                    ft.Row(controls=[
+                        radio_sp_char
+                    ],
+                    width=440, alignment=ft.MainAxisAlignment.END, 
+                )])
+            ], width = 460, 
+            ), padding= 5, margin= 5
         )
     )
 
