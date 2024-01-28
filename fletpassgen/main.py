@@ -62,7 +62,8 @@ def main(page: ft.Page):
             ft.Radio(value="none", label="None"), 
             ]), on_change=change_sp_char
             ) 
-    copy_button = ft.IconButton(ft.icons.COPY, tooltip="Copy", on_click=copy_password, visible = ("Safari" not in page.client_user_agent))
+    copy_button = ft.IconButton(ft.icons.COPY, tooltip="Copy", on_click=copy_password, 
+                                visible = (("Safari" and "Version" not in page.client_user_agent)))
     
     page.add(
         ft.Container(
@@ -93,8 +94,9 @@ def main(page: ft.Page):
                     width=440, alignment=ft.MainAxisAlignment.END, 
                 )])
             ], width = 460, 
-            ), padding= 5, margin= 5
+            ), margin= 5
         )
     )
 
-ft.app(main)
+#ft.app(main)
+ft.app(target=main, port=8000, view=ft.WEB_BROWSER)
