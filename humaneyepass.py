@@ -4,7 +4,6 @@ import secrets
 _DEFAULT_UPPERCASE = "ABCDFGHJKLMNPQRTUVWXYZ"
 _DEFAULT_LOWERCASE = "abcdefghikmnpqrtuvwxyz"
 _DEFAULT_DIGITS = "23456789"
-#_DEFAULT_SPECIAL = "@$&%+#-"
 _DEFAULT_SPECIAL = "!@#$&*-"
 
 def generate_password(length=12, uppercase_chars=None,
